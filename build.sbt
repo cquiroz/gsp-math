@@ -19,11 +19,11 @@ lazy val math = crossProject(JVMPlatform, JSPlatform)
   .settings(
     name := "gsp-math",
     libraryDependencies ++= Seq(
-      "org.tpolecat"               %% "atto-core"               % attoVersion,
-      "org.typelevel"              %% "cats-core"               % catsVersion,
-      "com.github.julien-truffaut" %% "monocle-core"            % monocleVersion,
-      "com.github.julien-truffaut" %% "monocle-macro"           % monocleVersion,
-      "org.scala-lang.modules"     %% "scala-collection-compat" % collCompatVersion
+      "org.tpolecat"               %%% "atto-core"               % attoVersion,
+      "org.typelevel"              %%% "cats-core"               % catsVersion,
+      "com.github.julien-truffaut" %%% "monocle-core"            % monocleVersion,
+      "com.github.julien-truffaut" %%% "monocle-macro"           % monocleVersion,
+      "org.scala-lang.modules"     %%% "scala-collection-compat" % collCompatVersion
     )
   )
   .jvmConfigure(_.enablePlugins(AutomateHeaderPlugin))
@@ -37,14 +37,13 @@ lazy val testkit = crossProject(JVMPlatform, JSPlatform)
   .settings(
     name := "gsp-math-testkit",
     libraryDependencies ++= Seq(
-      "org.typelevel"              %% "cats-testkit"           % catsVersion,
-      "org.typelevel"              %% "cats-testkit-scalatest" % catsTestkitScalaTestVersion,
-      "com.github.julien-truffaut" %% "monocle-law"            % monocleVersion,
+      "org.typelevel"              %%% "cats-testkit"           % catsVersion,
+      "org.typelevel"              %%% "cats-testkit-scalatest" % catsTestkitScalaTestVersion,
+      "com.github.julien-truffaut" %%% "monocle-law"            % monocleVersion,
     )
   )
   .jvmConfigure(_.enablePlugins(AutomateHeaderPlugin))
   .jsSettings(gspScalaJsSettings: _*)
-
 
 lazy val tests = crossProject(JVMPlatform, JSPlatform)
   .crossType(CrossType.Full)
@@ -56,4 +55,7 @@ lazy val tests = crossProject(JVMPlatform, JSPlatform)
   )
   .jvmConfigure(_.enablePlugins(AutomateHeaderPlugin))
   .jsSettings(gspScalaJsSettings: _*)
+  .jsSettings(
+    libraryDependencies += "io.github.cquiroz"       %%% "scala-java-time"    % "2.0.0-RC3"
 
+  )
